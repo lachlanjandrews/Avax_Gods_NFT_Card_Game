@@ -5,16 +5,16 @@ An NFT card game utilising the power of Avalanche and React.js
 
 ![Game Preview](/nft_card_game_promoimg.PNG)
 
-This challenge required the creation of a streamlit application that makes hiring a FinTech freelancer easier! The application allows the user to select a freelancer and how many hours they wish to hire them for, and then it can send ETH directly into their wallet as payment. The screenshots below are from **Ganache**, an application that shows the transaction history, details and addresses that were used in the KryptoJobs2Go application, straight from the blockchain as evidence that the application has worked.
+Created an NFT card game utilizing Solidity and the Avalanche network and Core wallet for the backend, and React.js and Tailwind for the frontend to create a clean and fun multiplayer NFT card game. Players register their name and wallet, create or join a battle and then play online against other competitors. Health points, mana and the attack and defense values are all linked and function so strategy must be used to win and get the opposing players health to zero before they defeat you. The tutorial was created by JSMastery.
 
 ---
 
 ## Technologies
 
 This repository utilises Hardhat and React.js:
-* [Hardhat](https://streamlit.io/) - Solidity technology
-* [Core Wallet](https://docs.python.org/3/library/os.html) - an Avalanche wallet to allow for interaction with the blockchain
-* [React.js](https://docs.python-requests.org/en/master/) - Frontend JavaScript language
+* [Hardhat](https://hardhat.org/) - Solidity technology
+* [Core Wallet](https://core.app/en/) - an Avalanche wallet to allow for interaction with the blockchain
+* [React.js](https://react.dev/) - Frontend JavaScript language
 
 
 
@@ -22,19 +22,19 @@ This repository utilises Hardhat and React.js:
 
 ## Installation Guide
 
-Install the Streamlit library using the following command: 'import streamlit as st'
-
-Install the os library using the following command: 'import os'
-
-Install the Requests library using the following command: 'import requests'
-
-Install the dotenv library using the following command: 'from dotenv import load_dotenv'
-
-Install the Dataclass library using the following command: 'from dataclasses import dataclass'
-
-Install the BIP44 library using the following command: 'from bip44 import Wallet'
-
-Install the web3 libraries using the following commands: 'from web3 import Account', 'from web3.auto.infura.kovan import w3', 'from web3 import middleware', 'from web3.gas_strategies.time_based import medium_gas_price_strategy'
+1. `cd web3`
+2. `npx hardhat` -> y → typescript → enter → enter
+3. `npm install @openzeppelin/contracts dotenv @nomiclabs/hardhat-ethers` + Hardhat packages `npm install --save-dev "hardhat@^2.12.0" "@nomicfoundation/hardhat-toolbox@^2.0.0"`
+4. Install [Core](https://chrome.google.com/webstore/detail/core/agoakfejjabomempkjlepdflaleeobhb), a Metamask smart wallet alternative built for Avalanche dApps
+  i. Turn on the testnet mode by: opening up the Core extension -> click the hamburger menu on the top left -> go to advanced -> turn on the testnet mode
+5. Fund your wallet from the [Avax Faucet](https://faucet.avax.network/)
+6. Update the `.env` file and add your PRIVATE_KEY variable.
+7. To get to the private key, do the following steps:
+  i. Open up the Core extension -> click the hamburger menu on the top left -> go to security and privacy -> click show recovery phase -> enter your password -> copy the phrase -> go to [wallet.avax.network](https://wallet.avax.network/) -> click access wallet -> choose mnemonic key phrase -> paste what the words we’ve copied from Core -> on the sidebar click manage keys -> view c-chain private key -> copy -> paste it in the .env file
+8. Compile the contract by running the `npx hardhat compile` command
+9. Deploy the smart contract on the Fuji test network by running the `npx hardhat run scripts/deploy.ts --network fuji` command
+  Move the `/artifacts/contracts/AVAXGods.json` file to the `/contract` folder on the frontend
+  Copy the address of the deployed contract from the terminal and paste it into the `/contract/index.js` file of the frontend application
 
 ---  
 
@@ -45,13 +45,23 @@ If you want to recreate it yourself using the files:
 
 - Add the contract address to 'ADDRESS' in '/client/src/contract/index.js'
 - Add your Core wallet private key to '/web3/.env' | DO NOT SHARE YOUR PRIVATE KEY WITH ANYONE ELSE OR MAKE IT PUBLIC
-
-[https://faucet.avax.network/]
+- Make sure to have Fuji testnet Avax in your wallet. You can request 2 Avax per day from the [Avalanche Faucet](https://faucet.avax.network/)
 
 ---
 ## Avax Gods
 
-Using streamlit to run the KryptoJobs2Go application, it was created to inspect and hire a range of FinTech freelancers. The application displays an image of the freelancer, the cost per hour in ETH to hire them, their name, their Ethereum address, and their KryptoJobs2Go rating out of 5.
+1. Connect your wallet to the site.
+2. Register your name and wallet.
+3. Create a battle or join.
+4. The rules of the game are located in the menu within the battle section or as follows:
+  'Card with the same defense and attack point will cancel each other out.',
+  'Attack points from the attacking card will deduct the opposing player’s health points.',
+  'If P1 does not defend, their health wil be deducted by P2’s attack.',
+  'If P1 defends, P2’s attack is equal to P2’s attack - P1’s defense.',
+  'If a player defends, they refill 3 Mana',
+  'If a player attacks, they spend 3 Mana'.
+5. Can forfeit the game through sidebar or the game will automatically return to the 'create-battle' page.
+6. Note: there have been some known issues, if nothing happens, refresh and it should fix the issue.
 
 
 ---
